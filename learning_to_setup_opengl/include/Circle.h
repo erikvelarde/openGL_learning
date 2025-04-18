@@ -5,31 +5,31 @@
 
 #include <cmath>
 #include <glad/glad.h>
-#include <vector>
+// #include <vector>
 
 class Circle {
-public:
-  Circle(float x, float y, float radius, int segments);
+    public:
+	Circle(float x, float y, float radius, int segments);
 
-  ~Circle();
+	~Circle();
 
-  void draw() const;
+	void draw() const;
 
-  void updateVertices(float aspectRatio);
+	void updateVertices(float aspectRatio);
 
-  void move(float dx, float dy, float minBound, float maxBound);
+	void move(float dx, float dy, float minBound, float maxBound);
 
-  float getX() const;
-  float getY() const;
-  float getRadius() const;
+	float getX() const;
+	float getY() const;
+	float getRadius() const;
 
-private:
-  float x, y;
-  float radius;
-  int segments;
-  unsigned int VAO, VBO;
+    private:
+	float x, y;
+	float radius;
+	int segments;
+	unsigned int VAO, VBO;
 
-  void setupBuffers();
+	void setupBuffers();
 };
 
 #endif // !CIRCLE_H

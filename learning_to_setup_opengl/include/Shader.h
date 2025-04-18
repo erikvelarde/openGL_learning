@@ -4,21 +4,21 @@
 #define SHADER_H
 
 #include <glad/glad.h>
-#include <iostream>
+// #include <iostream>
 #include <string>
 
 class Shader {
-public:
-  Shader(const char *vertexSource, const char *fragmentSource);
+    public:
+	Shader(const char *vertexSource, const char *fragmentSource);
 
-  ~Shader();
+	~Shader();
 
-  void use() const;
+	void use() const;
 
-private:
-  unsigned int ID;
+    private:
+	unsigned int ID;
 
-  void checkCompileErrors(unsigned int shader, const std::string &type);
+	void checkCompileErrors(unsigned int shader, const std::string &type);
 };
 
 #endif // SHADER_H

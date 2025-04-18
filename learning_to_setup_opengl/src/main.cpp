@@ -1,12 +1,17 @@
 #include "Application.h"
-int main() {
-  try {
-    Application app(800, 600, "Moving Circle");
-    app.run();
-  } catch (const std::exception &e) {
-    std::cerr << "Error: " << e.what() << std::endl;
-    return EXIT_FAILURE;
-  }
+#include <iostream>
 
-  return EXIT_SUCCESS;
+int main()
+{
+	if (true) std::cout << "hello world" << std::endl;
+
+	try {
+		Application app(800, 600, "Moving Circle");
+		app.run();
+	} catch (const std::exception &e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
+
+	return EXIT_SUCCESS;
 }
