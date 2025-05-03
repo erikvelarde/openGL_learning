@@ -8,8 +8,7 @@
 Application::Application(int width, int height, const char *title)
 	: windowWidth(width)
 	, windowHeight(height)
-	, aspectRatio((float)width / (float)height)
-{
+	, aspectRatio((float)width / (float)height) {
 	initGLFW();
 	createWindow(title);
 	initGLAD();
@@ -18,13 +17,11 @@ Application::Application(int width, int height, const char *title)
 	setupCircle();
 }
 
-Application::~Application()
-{
+Application::~Application() {
 	glfwTerminate();
 }
 
-void Application::run()
-{
+void Application::run() {
 	while (!glfwWindowShouldClose(window)) {
 		processInput();
 		render();
@@ -33,8 +30,7 @@ void Application::run()
 	}
 }
 
-void Application::initGLFW()
-{
+void Application::initGLFW() {
 	if (!glfwInit()) {
 		throw std::runtime_error("Failed to initialize GLFW");
 	}
@@ -44,8 +40,7 @@ void Application::initGLFW()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
 
-void Application::createWindow(const char *title)
-{
+void Application::createWindow(const char *title) {
 	window = glfwCreateWindow(windowWidth, windowHeight, title, nullptr,
 				  nullptr);
 	if (!window) {
@@ -55,16 +50,14 @@ void Application::createWindow(const char *title)
 	glfwMakeContextCurrent(window);
 }
 
-void Application::initGLAD()
-{
+void Application::initGLAD() {
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 		throw std::runtime_error("Failed to initialize GLAD");
 	}
 	glViewport(0, 0, windowWidth, windowHeight);
 }
 
-void Application::setupCallbacks()
-{
+void Application::setupCallbacks() {
 	glfwSetFramebufferSizeCallback(window, [](GLFWwindow *window, int width,
 						  int height) {
 		auto app = static_cast<Application *>(
@@ -74,8 +67,7 @@ void Application::setupCallbacks()
 	glfwSetWindowUserPointer(window, this);
 }
 
-void Application::setupShaders()
-{
+void Application::setupShaders() {
 	const char *vertexShaderSource = R"(
             #version 330 core
             layout (location = 0) in vec2 aPos;
@@ -96,14 +88,12 @@ void Application::setupShaders()
 					  fragmentShaderSource);
 }
 
-void Application::setupCircle()
-{
+void Application::setupCircle() {
 	circle = std::make_unique<Circle>(0.5f, 0.5f, 0.1f, 100);
 	circle->updateVertices(aspectRatio);
 }
 
-void Application::onFramebufferSize(int width, int height)
-{
+void Application::onFramebufferSize(int width, int height) {
 	windowWidth = width;
 	windowHeight = height;
 	aspectRatio = (float)width / (float)height;
@@ -111,21 +101,16 @@ void Application::onFramebufferSize(int width, int height)
 	circle->updateVertices(aspectRatio);
 }
 
-void Application::processInput()
-{
+void Application::processInput() {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
 
 	float dx = 0.0f, dy = 0.0f;
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		dy += moveSpeed;
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		dy -= moveSpeed;
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		dx -= moveSpeed;
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		dx += moveSpeed;
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) dy += moveSpeed;
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) dy -= moveSpeed;
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) dx -= moveSpeed;
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) dx += moveSpeed;
 
 	if (dx != 0.0f || dy != 0.0f) {
 		circle->move(dx, dy, -1.0f, 1.0f);
@@ -133,8 +118,7 @@ void Application::processInput()
 	}
 }
 
-void Application::render()
-{
+void Application::render() {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 

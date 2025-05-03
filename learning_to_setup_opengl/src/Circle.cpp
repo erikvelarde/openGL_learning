@@ -5,26 +5,22 @@ Circle::Circle(float x, float y, float radius, int segments)
 	: x(x)
 	, y(y)
 	, radius(radius)
-	, segments(segments)
-{
+	, segments(segments) {
 	setupBuffers();
 }
 
-Circle::~Circle()
-{
+Circle::~Circle() {
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 }
 
-void Circle::draw() const
-{
+void Circle::draw() const {
 	glBindVertexArray(VAO);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, segments + 2);
 	glBindVertexArray(0);
 }
 
-void Circle::updateVertices(float aspectRatio)
-{
+void Circle::updateVertices(float aspectRatio) {
 	std::vector<float> vertices;
 	vertices.push_back(x);
 	vertices.push_back(y);
@@ -42,8 +38,7 @@ void Circle::updateVertices(float aspectRatio)
 		     vertices.data(), GL_STATIC_DRAW);
 }
 
-void Circle::move(float dx, float dy, float minBound, float maxBound)
-{
+void Circle::move(float dx, float dy, float minBound, float maxBound) {
 	x = x + dx;
 	y = y + dy;
 
@@ -53,21 +48,19 @@ void Circle::move(float dx, float dy, float minBound, float maxBound)
 	if (y > maxBound) y = maxBound;
 }
 
-float Circle::getX() const
-{
+float Circle::getX() const {
 	return x;
 }
-float Circle::getY() const
-{
+
+float Circle::getY() const {
 	return y;
 }
-float Circle::getRadius() const
-{
+
+float Circle::getRadius() const {
 	return radius;
 }
 
-void Circle::Circle::setupBuffers()
-{
+void Circle::Circle::setupBuffers() {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 
@@ -80,5 +73,3 @@ void Circle::Circle::setupBuffers()
 
 	glBindVertexArray(0);
 }
-
-;

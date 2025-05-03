@@ -1,9 +1,8 @@
 #include "Application.h"
 #include <iostream>
 
-int main()
-{
-	if (true) std::cout << "hello world" << std::endl;
+int main() {
+	std::cout << "Rendering a circle with OpenGL." << std::endl;
 
 	try {
 		Application app(800, 600, "Moving Circle");

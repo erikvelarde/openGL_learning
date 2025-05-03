@@ -1,8 +1,7 @@
 #include "./Shader.h"
 #include <iostream>
 
-Shader::Shader(const char *vertexSource, const char *fragmentSource)
-{
+Shader::Shader(const char *vertexSource, const char *fragmentSource) {
 	// Vertex shader
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexSource, nullptr);
@@ -28,18 +27,15 @@ Shader::Shader(const char *vertexSource, const char *fragmentSource)
 	glDeleteShader(fragmentShader);
 }
 
-Shader::~Shader()
-{
+Shader::~Shader() {
 	glDeleteProgram(ID);
 }
 
-void Shader::use() const
-{
+void Shader::use() const {
 	glUseProgram(ID);
 }
 
-void Shader::checkCompileErrors(unsigned int shader, const std::string &type)
-{
+void Shader::checkCompileErrors(unsigned int shader, const std::string &type) {
 	int success;
 	char infoLog[1024];
 	if (type != "PROGRAM") {
